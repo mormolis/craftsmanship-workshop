@@ -5,7 +5,7 @@ import java.util.Objects;
 public class CD {
     private String title;
 
-    public CD(String title) {
+    public CD(String title, String artist) {
         this.title = title;
     }
 
