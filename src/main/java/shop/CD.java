@@ -6,18 +6,24 @@ public class CD {
     private String title;
     private String artist;
     private Double price;
+    private ChartService chartService;
 
-    public CD(String title, String artist, Double price) {
+    public CD(String title, String artist, Double price, ChartService chartService) {
         this.title = title;
         this.artist = artist;
         this.price = price;
+        this.chartService = chartService;
     }
 
     public String getTitle() {
         return title;
     }
 
+    // would it be good idea to inject chart service here without keeping it in the state
     public Double getPrice() {
+        if (chartService.checkChart(title)) {
+            return --price;
+        }
         return price;
     }
 

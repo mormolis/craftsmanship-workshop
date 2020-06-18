@@ -6,6 +6,7 @@ import java.util.List;
 public class Shop {
 
     private Inventory inventory;
+    //move this to the buy method
     private PaymentHandler paymentHandler;
 
     public Shop(Inventory inventory, PaymentHandler paymentHandler) {
@@ -18,13 +19,17 @@ public class Shop {
     }
 
     public CD searchByArtist(String artist) {
-        return new CD("Melon Collie and The Infinite Sadness", "The Smashing Pumpkins", 10.00);
+        throw new UnsupportedOperationException();
     }
 
     public Receipt buy(CD cd) {
-        inventory.checkByTitle(cd.getTitle());
+
+        if(!inventory.isTitleAvailable(cd.getTitle())){
+            throw new CDNotFoundException(cd.getTitle() + " not found");
+        }
+
         double price = cd.getPrice();
-        paymentHandler.handle(price);
-        return new Receipt();
+
+        return paymentHandler.handle(price);
     }
 }
