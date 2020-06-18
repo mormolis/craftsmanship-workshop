@@ -13,18 +13,18 @@ public class Shop {
         this.paymentHandler = paymentHandler;
     }
 
-    public List<CD> searchByTitle(String title) {
+    public CD searchByTitle(String title) {
         return inventory.checkByTitle(title);
     }
 
     public CD searchByArtist(String artist) {
-        return new CD("Melon Collie and The Infinite Sadness", "The Smashing Pumpkins",10.00);
+        return new CD("Melon Collie and The Infinite Sadness", "The Smashing Pumpkins", 10.00);
     }
 
-    public Receipt buy(List<CD> cds) {
-        paymentHandler.handle(cds.stream()
-                .mapToDouble(CD::getPrice)
-                .reduce(0, (price1, price2) -> price1 + price2));
+    public Receipt buy(CD cd) {
+        inventory.checkByTitle(cd.getTitle());
+        double price = cd.getPrice();
+        paymentHandler.handle(price);
         return new Receipt();
     }
 }

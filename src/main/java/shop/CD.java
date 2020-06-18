@@ -13,6 +13,10 @@ public class CD {
         this.price = price;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public Double getPrice() {
         return price;
     }
